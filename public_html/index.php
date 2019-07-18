@@ -1,6 +1,5 @@
 <?php
 
-//require 'config.php';
 class FileDB
 {
     private $file_name;
@@ -14,10 +13,10 @@ class FileDB
     public function load()
     {
         if (file_exists($this->file_name)) {
-            $json = file_get_contents($this->file_name);
+            $encoded_string = file_get_contents($this->file_name);
 
-            if ($json !== false) {
-                $this->data = json_decode($this->data, true);
+            if ($encoded_string !== false) {
+                $this->data = json_decode($encoded_string, true);
             }
         }
     }
@@ -26,16 +25,27 @@ class FileDB
     {
         if ($this->data == null) {
             $this->load();
-            return $this->data;
-        } else {
-            return $this->data;
         }
+        return $this->data;
     }
 
+    public function setData($data_array) {
+        $this->data = $data_array;
+    }
+
+    public function save() {
+        $json_string = json_encode($this->data);
+        $success = file_put_contents($this->file_name, $json_string);
+        if ($success !== FALSE) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
 
 $newObject = new FileDB('text.txt');
-
+var_dump($newObject->getData());
 
 ?>
 <html>
