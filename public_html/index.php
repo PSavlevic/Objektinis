@@ -1,40 +1,17 @@
 <?php
 
-class ThailandSurprise
+class FileDB
 {
-    public $clothes;
-    private $balls;
-    private $name;
+    private $file_name;
 
-    public function __construct($clothes, $name)
+    public function __construct($file_name)
     {
-        $this->clothes = $clothes;
-        $this->balls = rand(false, true);
-        $this->name = $name;
-    }
-
-    public function attachBalls()
-    {
-        $this->balls = true;
-    }
-
-    public function detachBalls()
-    {
-        $this->balls = false;
-    }
-
-    public function getPhoto()
-    {
-        if ($this->balls) {
-            return 'http://www.mbldesigns.com/eggart/eggs_turkey.jpg';
-        } else {
-            return 'https://image.shutterstock.com/image-vector/no-egg-icon-free-vector-260nw-792375652.jpg';
-        }
+        $this->file_name = $file_name;
     }
 }
 
-$person = new ThailandSurprise('miniskirt', 'TrippleX');
-var_dump($person);
+$newObject = new FileDB('info.txt');
+var_dump($newObject);
 
 ?>
 <html>
@@ -46,6 +23,5 @@ var_dump($person);
     <link rel="stylesheet" href="media/css/style.css">
 </head>
 <body>
-    <img src="<?php print $person->getPhoto(); ?>" alt="photo">
 </body>
 </html>
