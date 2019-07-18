@@ -1,14 +1,16 @@
 <?php
 
-class ThailandSurprise
-{
-    public $clothes;
+class ThailandSurprise{
+    private $balls;
+
+    public function __construct($balls)
+    {
+        $this -> balls = $balls;
+    }
 }
 
-$newObject = new ThailandSurprise();
-$newObject->clothes = 'miniskirt';
+$newObject = new ThailandSurprise(rand(false, true));
 var_dump($newObject);
-print $newObject->clothes;
 
 
 ?>
