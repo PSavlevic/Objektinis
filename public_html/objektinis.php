@@ -3,15 +3,14 @@
 class ThailandSurprise{
     private $balls;
 
-    public function __construct($balls)
+    public function __construct()
     {
-        $this -> balls = $balls;
+        $this -> balls = rand(false, true);
     }
 }
 
-$newObject = new ThailandSurprise(rand(false, true));
+$newObject = new ThailandSurprise();
 var_dump($newObject);
-
 
 ?>
 <html>
