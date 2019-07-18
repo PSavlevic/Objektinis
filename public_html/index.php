@@ -3,10 +3,22 @@
 class FileDB
 {
     private $file_name;
+    private $data;
 
     public function __construct($file_name)
     {
         $this->file_name = $file_name;
+    }
+
+    public function load($file_name)
+    {
+        if (file_exists($this -> file_name)) {
+            $this -> data = file_get_contents($file_name);
+            if ($this -> data !== false) {
+                return json_decode($this->data, true);
+            }
+        }
+        return false;
     }
 }
 
