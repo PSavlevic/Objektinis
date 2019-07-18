@@ -20,12 +20,20 @@ class ThailandSurprise
     {
         $this->balls = false;
     }
+
+    public function getPhoto()
+    {
+        if ($this->balls) {
+            return "http://www.mbldesigns.com/eggart/eggs_turkey.jpg";
+        } else {
+            return "https://image.shutterstock.com/image-vector/no-egg-icon-free-vector-260nw-792375652.jpg";
+        }
+    }
 }
 
 $clothes = new ThailandSurprise('miniskirt');
 $person = new ThailandSurprise('miniskirt');
-$person->attachBalls();
-$person->detachBalls();
+$eggs = $person->getPhoto();
 var_dump($person);
 
 ?>
@@ -38,6 +46,6 @@ var_dump($person);
     <link rel="stylesheet" href="media/css/style.css">
 </head>
 <body>
-
+<img src="<?php print $eggs; ?>" alt="photo">
 </body>
 </html>
