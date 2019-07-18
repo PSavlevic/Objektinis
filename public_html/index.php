@@ -26,6 +26,7 @@ class FileDB
     {
         if ($this->data == null) {
             $this->load();
+            return $this->data;
         } else {
             return $this->data;
         }
