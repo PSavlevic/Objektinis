@@ -33,7 +33,6 @@ class ThailandSurprise
 
 $clothes = new ThailandSurprise('miniskirt');
 $person = new ThailandSurprise('miniskirt');
-$eggs = $person->getPhoto();
 var_dump($person);
 
 ?>
@@ -46,6 +45,6 @@ var_dump($person);
     <link rel="stylesheet" href="media/css/style.css">
 </head>
 <body>
-<img src="<?php print $eggs; ?>" alt="photo">
+    <img src="<?php print $person->getPhoto(); ?>" alt="photo">
 </body>
 </html>
