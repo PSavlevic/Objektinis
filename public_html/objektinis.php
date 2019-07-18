@@ -1,11 +1,12 @@
 <?php
 
-class ThailandSurprise{
+class ThailandSurprise
+{
     private $balls;
 
     public function __construct()
     {
-        $this -> balls = rand(false, true);
+        $this->balls = rand(false, true);
     }
 }
 
