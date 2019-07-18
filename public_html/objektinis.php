@@ -2,16 +2,31 @@
 
 class ThailandSurprise
 {
+    public $clothes;
     private $balls;
 
-    public function __construct()
+    public function __construct($clothes)
     {
+        $this->clothes = $clothes;
         $this->balls = rand(false, true);
+    }
+
+    public function attachBalls()
+    {
+        $this->balls = true;
+    }
+
+    public function detachBalls()
+    {
+        $this->balls = false;
     }
 }
 
-$newObject = new ThailandSurprise();
-var_dump($newObject);
+$clothes = new ThailandSurprise('miniskirt');
+$person = new ThailandSurprise('miniskirt');
+$person->attachBalls();
+$person->detachBalls();
+var_dump($person);
 
 ?>
 <html>
