@@ -1,39 +1,51 @@
 <?php
-// Uzkraunam visus reikalingus failus
-require '../config.php';
+
+class ThailandSurprise
+{
+    public $clothes;
+    private $balls;
+    private $name;
+
+    public function __construct($clothes, $name)
+    {
+        $this->clothes = $clothes;
+        $this->balls = rand(false, true);
+        $this->name = $name;
+    }
+
+    public function attachBalls()
+    {
+        $this->balls = true;
+    }
+
+    public function detachBalls()
+    {
+        $this->balls = false;
+    }
+
+    public function getPhoto()
+    {
+        if ($this->balls) {
+            return 'http://www.mbldesigns.com/eggart/eggs_turkey.jpg';
+        } else {
+            return 'https://image.shutterstock.com/image-vector/no-egg-icon-free-vector-260nw-792375652.jpg';
+        }
+    }
+}
+
+$person = new ThailandSurprise('miniskirt', 'TrippleX');
+var_dump($person);
 
 ?>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Welcome To PHP FightClub!</title>
-        <link rel="stylesheet" href="media/css/normalize.css">
-        <link rel="stylesheet" href="media/css/style.css">
-        <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
-        <link rel="icon" href="favicon.ico" type="image/x-icon">        
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>    
-        <script src="media/js/app.js"></script>
-        <style>
-            table {
-                border: 1px solid black;
-            }
-        </style>
-    </head>
-    <body>
-        <!-- $nav Navigation generator -->
-        <?php require ROOT . '/templates/navigation.tpl.php'; ?>        
-        <h1>
-            Welcome to the GAME!!!
-        </h1>
-        <?php if (isset($message)): ?>
-            <div class="message">
-                <span class="text"><?php print $message; ?></span>
-                <span class="close">X</span>
-            </div>
-        <?php endif; ?>
-
-        <!-- $form HTML generator -->
-        <?php require ROOT . '/templates/form.tpl.php'; ?>
-    </body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome To PHP FightClub!</title>
+    <link rel="stylesheet" href="media/css/normalize.css">
+    <link rel="stylesheet" href="media/css/style.css">
+</head>
+<body>
+    <img src="<?php print $person->getPhoto(); ?>" alt="photo">
+</body>
 </html>
