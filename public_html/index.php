@@ -47,12 +47,11 @@ class FileDB
 
     public function createTable($table_name)
     {
-        if ($this->tableExists($table_name)){
-            return false;
-        } else {
+        if ($this->tableExists($table_name)) {
             $this->data[$table_name] = [];
             return true;
         }
+        return false;
     }
 
     public function dropTable($table_name)
@@ -68,7 +67,25 @@ class FileDB
             return false;
         }
     }
+
+    public function truncateTable($table_name)
+    {
+        if($this->tableExists($table_name)){
+            $this->data[$table_name] = [];
+            return true;
+        }
+    }
+
+    public function insertRow($table_name, $row, $row_id=null) {
+        if($this->tableExists($table_name)){
+            $this->data[$table_name][$row][] = $row_id;
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
+
 
 $newObject = new FileDB('text.txt');
 var_dump($newObject);
