@@ -54,6 +54,11 @@ class FileDB
             return true;
         }
     }
+
+    public function dropTable($table_name)
+    {
+        unset($this->data[$table_name]);
+    }
 }
 
 $newObject = new FileDB('text.txt');
