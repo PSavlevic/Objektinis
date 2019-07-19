@@ -29,11 +29,13 @@ class FileDB
         return $this->data;
     }
 
-    public function setData($data_array) {
+    public function setData($data_array)
+    {
         $this->data = $data_array;
     }
 
-    public function save() {
+    public function save()
+    {
         $json_string = json_encode($this->data);
         $success = file_put_contents($this->file_name, $json_string);
         if ($success !== FALSE) {
@@ -42,10 +44,20 @@ class FileDB
             return false;
         }
     }
+
+    public function createTable($table_name)
+    {
+        if (isset($this->data[$table_name])) {
+            return false;
+        } else {
+            $this->data[$table_name] = [];
+            return true;
+        }
+    }
 }
 
 $newObject = new FileDB('text.txt');
-var_dump($newObject->getData());
+var_dump($newObject);
 
 ?>
 <html>
