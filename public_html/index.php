@@ -92,7 +92,7 @@ class FileDB
 
 
 $newObject = new FileDB('text.txt');
-var_dump($newObject->insertRow('asd', 'row', 'id'));
+var_dump($newObject->insertRow('asd', 'row', 'idd'));
 var_dump($newObject);
 
 ?>
