@@ -70,16 +70,20 @@ class FileDB
 
     public function truncateTable($table_name)
     {
-        if($this->tableExists($table_name)){
+        if ($this->tableExists($table_name)) {
             $this->data[$table_name] = [];
             return true;
         }
     }
 
-    public function insertRow($table_name, $row, $row_id=null) {
-        if($this->tableExists($table_name)){
-            $this->data[$table_name][$row][] = $row_id;
-            return true;
+    public function insertRow($table_name, $row, $row_id = null)
+    {
+        if ($this->tableExists($table_name)) {
+            if ($this->data[$table_name][$row_id] == null) {
+                $this->data[$table_name][$row_id] = $row;
+            } else {
+                $this->data[$table_name][$row_id][] = $row;
+            }
         } else {
             return false;
         }
@@ -88,6 +92,7 @@ class FileDB
 
 
 $newObject = new FileDB('text.txt');
+var_dump($newObject->insertRow('asd', 'row', 'id'));
 var_dump($newObject);
 
 ?>
