@@ -79,20 +79,30 @@ class FileDB
     public function insertRow($table_name, $row, $row_id = null)
     {
         if ($this->tableExists($table_name)) {
-            if ($this->data[$table_name][$row_id] == null) {
+            if ($row_id) {
                 $this->data[$table_name][$row_id] = $row;
             } else {
-                $this->data[$table_name][$row_id][] = $row;
+                $this->data[$table_name][] = $row;
             }
+
+            return true;
+        }
+
+        return false;
+    }
+
+    public function rowExists($table_name, $row_id)
+    {
+        if (isset($this->data[$table_name][$row_id])) {
+            return true;
         } else {
             return false;
         }
     }
 }
 
-
 $newObject = new FileDB('text.txt');
-var_dump($newObject->insertRow('asd', 'row', 'idd'));
+var_dump($newObject->rowExists('rowid', 'klas'));
 var_dump($newObject);
 
 ?>
