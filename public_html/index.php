@@ -95,14 +95,32 @@ class FileDB
     {
         if (isset($this->data[$table_name][$row_id])) {
             return true;
-        } else {
-            return false;
         }
+        return false;
     }
+
+    /**
+     * Jeigu toks $row_id jau egzistuoja table,
+    return'inti false'ą, kitu atveju įtraukti
+    eilutę ir return'inti true;
+     * @param string $table_name
+     * @param string $row
+     * @param string $row_id
+     * @return boolean
+     */
+    public function rowInsertIfNotExists($table_name, $row, $row_id)
+    {
+        if ($this->rowExists($table_name, $row_id) !== false) {
+            $this->insertRow($table_name, $row, $row_id = null);
+            return true;
+        }
+        return false;
+    }
+
 }
 
 $newObject = new FileDB('text.txt');
-var_dump($newObject->rowExists('rowid', 'klas'));
+var_dump($newObject->rowInsertIfNotExists('rowid', 'klas', 'hihi'));
 var_dump($newObject);
 
 ?>
