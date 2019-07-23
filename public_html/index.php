@@ -138,22 +138,74 @@ class FileDB
 
 
     /**
-     * Ištrina eilutę $data'os $table $row_id
+     * 9uzd Ištrina eilutę $data'os $table $row_id
      * indeksu
      * @param string $table_name
      * @param integer $row_id
      */
     public function deleteRow($table_name, $row_id)
     {
-        $this->data[$table_name][$row_id] = [];
-        return true;
+        if ($this->rowExists($table_name, $row_id)) {
+            unset($this->data[$table_name][$row_id]);
+            return true;
+        }
+        return false;
+    }
 
+    /**
+     * 10uzd Paima row-Id jeigu rowExist
+     * @param string $table_name
+     * @param $row_id
+     * @return mixed
+     */
+    public function getRow($table_name, $row_id)
+    {
+        if ($this->rowExists($table_name, $row_id)) {
+            return $this->data[$table_name][$row_id];
+        }
+        return false;
+    }
+
+
+    /**
+     * 11uzd Grazina eilute $data'os $table pagal tai, kokius condition'us nurodeme: Pvz: ['name' => 'Mantas'];
+     * @param string $table_name
+     * @param array $conditions
+     */
+
+    public function getRowsWhere($table_name, array $conditions)
+    {
+        $rows = [];
+        foreach ($this->data[$table_name] as $row_id => $row) {
+            $conditions_met =true;
+            foreach ($conditions as $col_id => $cond_v) {
+                $row_value = $row[$col_id];
+                if($row_value != $cond_v) {
+                    $conditions_met = false;
+                    break;
+                }
+            }
+            if($conditions_met) {
+                $rows[] = $row;
+            }
+        }
+
+        return $rows;
     }
 
 }
 
+$row = [
+        'name' => 'Mantas'
+];
+
+
 $newObject = new FileDB('text.txt');
-var_dump($newObject->deleteRow('rowid', 2));
+$newObject -> createTable('tabelis');
+$newObject -> insertRow('tabelis', 'pirmas');
+$newObject -> insertRow('tabelis', 'antras');
+$newObject -> insertRow('tabelis', 'treciA');
+var_dump($newObject->getRowsWhere('rowid', $row));
 var_dump($newObject);
 
 ?>
