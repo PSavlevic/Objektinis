@@ -1,5 +1,12 @@
 <?php
 
+require '../classes/Drink.php';
+
+$getset = new Drink();
+$getset ->setName('Kazkoks');
+$getset ->setAbarot(32);
+var_dump($getset);
+
 class FileDB
 {
     private $file_name;
@@ -173,40 +180,38 @@ class FileDB
      * @param array $conditions
      */
 
-    public function getRowsWhere($table_name, array $conditions)
-    {
+    public function getRowsWhere($table_name, $conditions) {
         $rows = [];
         foreach ($this->data[$table_name] as $row_id => $row) {
-            $conditions_met =true;
-            foreach ($conditions as $col_id => $cond_v) {
+            $conditions_met = true;
+            foreach ($conditions as $col_id => $cond_value) {
                 $row_value = $row[$col_id];
-                if($row_value != $cond_v) {
+                if ($row_value != $cond_value) {
                     $conditions_met = false;
                     break;
                 }
             }
-            if($conditions_met) {
+            if ($conditions_met) {
                 $rows[] = $row;
             }
         }
-
         return $rows;
     }
 
 }
 
-$row = [
-        'name' => 'Mantas'
-];
+//$row = [
+//        'name' => 'Mantas'
+//];
 
 
-$newObject = new FileDB('text.txt');
-$newObject -> createTable('tabelis');
-$newObject -> insertRow('tabelis', 'pirmas');
-$newObject -> insertRow('tabelis', 'antras');
-$newObject -> insertRow('tabelis', 'treciA');
-var_dump($newObject->getRowsWhere('rowid', $row));
-var_dump($newObject);
+//$newObject = new FileDB('text.txt');
+//$newObject -> createTable('tabelis');
+//$newObject -> insertRow('tabelis', 'pirmas');
+//$newObject -> insertRow('tabelis', 'antras');
+//$newObject -> insertRow('tabelis', 'treciA');
+//var_dump($newObject->getRowsWhere('rowid', $row));
+//var_dump($newObject);
 
 ?>
 <html>
