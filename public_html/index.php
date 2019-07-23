@@ -101,8 +101,8 @@ class FileDB
 
     /**
      * Jeigu toks $row_id jau egzistuoja table,
-    return'inti false'ą, kitu atveju įtraukti
-    eilutę ir return'inti true;
+     * return'inti false'ą, kitu atveju įtraukti
+     * eilutę ir return'inti true;
      * @param string $table_name
      * @param string $row
      * @param string $row_id
@@ -110,10 +110,29 @@ class FileDB
      */
     public function rowInsertIfNotExists($table_name, $row, $row_id)
     {
-        if ($this->rowExists($table_name, $row_id) !== false) {
-            $this->insertRow($table_name, $row, $row_id = null);
+        if (!$this->rowExists($table_name, $row_id)) {
+            $this->insertRow($table_name, $row, $row_id);
             return true;
         }
+
+        return false;
+    }
+
+    /**
+     * Perrašo eilutę $data'os $table $row_id
+     * indeksu su $row array'jum, jeigu ji
+     * egzistuoja
+     * @param string $table
+     * @param string $row_id
+     * @param string $row
+     */
+    public function updateRow($table_name, $row_id, $row)
+    {
+        if ($this->rowExists($table_name, $row_id)) {
+            $this->data[$table_name][$row_id] = $row;
+            return true;
+        }
+
         return false;
     }
 
