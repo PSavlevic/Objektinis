@@ -136,10 +136,24 @@ class FileDB
         return false;
     }
 
+
+    /**
+     * Ištrina eilutę $data'os $table $row_id
+     * indeksu
+     * @param string $table_name
+     * @param integer $row_id
+     */
+    public function deleteRow($table_name, $row_id)
+    {
+        $this->data[$table_name][$row_id] = [];
+        return true;
+
+    }
+
 }
 
 $newObject = new FileDB('text.txt');
-var_dump($newObject->rowInsertIfNotExists('rowid', 'klas', 'hihi'));
+var_dump($newObject->deleteRow('rowid', 2));
 var_dump($newObject);
 
 ?>
